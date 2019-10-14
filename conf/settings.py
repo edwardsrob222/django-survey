@@ -25,7 +25,7 @@ SECRET_KEY = 'v#w1%3ofjwi164z=pip!23)9$*sp0-)^5w3=3wmm-7_w+0eynk'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['secret-scrubland-94527.herokuapp.com']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
