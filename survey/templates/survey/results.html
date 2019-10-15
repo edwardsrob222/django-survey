@@ -8,5 +8,6 @@
     <li>{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
 {% endfor %}
 </ul>
-
+<a href="{% url 'survey:index' %}">Home</a>
 {% endblock %}
+<!-- <button type="button" name="button" href="{% url 'survey:index' %}">Home</button> -->
