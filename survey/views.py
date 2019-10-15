@@ -5,37 +5,51 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
 from django.views import generic
 from .models import Question, Choice
-# from .forms import QuestionForm
-
-# Create your views here.
-def index(request):
-    question_list = Questions.objects.all()
-    context = {
-        'question_list': question_list,
-    }
-
-    return render(request, 'questions/index.html', context)
+from .forms import QuestionForm, ChoiceFormSet
 
 class IndexView(generic.ListView):
+    model = Question
     template_name = 'survey/index.html'
     # instead of using object_list
     context_object_name = 'question_list'
 
-    def get_queryset(self):
-        """Return the last five published questions."""
-        return Question.objects.all()
 
-# class DetailView(generic.DetailView):
-#     model = Question
-#     template_name = 'survey/detail.html'
+# detial view is used to render details of one item in specified table
+class DetailView(generic.DetailView):
+    model = Question
+    template_name = 'survey/detail.html'
 
-# class ResultsView(generic.DetailView):
-#     model = Question
-#     template_name = 'survey/results.html'
+
+# detial view is used to render details of one item in specified table
+class ResultsView(generic.DetailView):
+    model = Question
+    template_name = 'survey/results.html'
 
 class CreateView(generic.CreateView):
     model = Question
-    fields = '__all__'
     template_name = 'survey/create.html'
+    fields = '__all__'
 
-# def create_survey(request, question_id):
+    def get_context_data(self, **kwargs):
+        context = super(CreateView, self).get_context_data(**kwargs)
+        if self.request.POST:
+            context['form'] = QuestionForm(self.request.POST)
+            context['formset'] = ChoiceFormSet(self.request.POST)
+        else:
+            context['form'] = QuestionForm()
+            context['formset'] = ChoiceFormSet()
+        return context
+
+    def form_valid(self, form):
+        context = self.get_context_data()
+        form = context['form']
+        formset = context['formset']
+        if all([form.is_valid(), formset.is_valid()]):
+            form.instance.created_by = self.request.user
+            question = form.save()
+            for inline_form in formset:
+                if inline_form.cleaned_data:
+                    choice = inline_form.save(commit=False)
+                    choice.question = question
+                    choice.save()
+            return HttpResponseRedirect(reverse('survey:index',))

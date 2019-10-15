@@ -1,19 +1,8 @@
-
-{% load static %}
-
-<!-- load static enables css styling -->
-
-<html lang="en">
-  <head>
-    <title>SURVEY</title>
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-    <link rel="stylesheet" type="text/css" href="{% static 'survey/styles.css' %}">
-  </head>
-  <body>
-    <div class="container-fluid">
-      {% block content %}
-      {% endblock %}
-    </div>
-  </body>
-</html>
+<form method='post'>
+  {% csrf_token %}
+  <table>
+    {{ form }}
+    {{ formset }}
+   </table>
+  <button>Submit</button>
+</form>

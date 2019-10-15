@@ -2,10 +2,11 @@ from django.urls import path
 
 from . import views
 
-app_name = 'accounts'
+app_name = 'survey'
 
 urlpatterns = [
-    # path('signup/', views.SignUpView.as_view(), name='signup'),
     path('', views.IndexView.as_view(), name='index'),
-    path('all/', views.CreateView.as_view(), name='create'),
+    path('add/', views.CreateView.as_view(), name='create'),
+    path('<int:pk>/detail/', views.DetailView.as_view(), name='detail'),
+    path('<int:pk>/results/', views.ResultsView.as_view(), name='results'),
 ]
