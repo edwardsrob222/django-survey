@@ -8,6 +8,14 @@ from .models import Question, Choice
 # from .forms import QuestionForm
 
 # Create your views here.
+def index(request):
+    question_list = Questions.objects.all()
+    context = {
+        'question_list': question_list,
+    }
+
+    return render(request, 'questions/index.html', context)
+
 class IndexView(generic.ListView):
     template_name = 'survey/index.html'
     # instead of using object_list

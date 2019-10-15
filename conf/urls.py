@@ -17,6 +17,8 @@ from django.contrib import admin
 from django.urls import path, include
 from survey.views import IndexView
 
+app_name = 'question'
+
 urlpatterns = [
     path('survey/', include('survey.urls', namespace='survey'),),
     path('admin/', admin.site.urls),
