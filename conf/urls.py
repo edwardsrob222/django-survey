@@ -20,7 +20,7 @@ from survey.views import IndexView
 app_name = 'question'
 
 urlpatterns = [
-    path('survey/', include('survey.urls', namespace='survey')),
+    path('', include('survey.urls', namespace='survey')),
     path('admin/', admin.site.urls),
 
 ]
