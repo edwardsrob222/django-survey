@@ -4,5 +4,10 @@
     {{ form }}
     {{ formset }}
    </table>
+   {% if question_list %}
+   {% for question in question_list %}
+   <p>{{questions.question_text}}</p>
+   {% endfor %}
+   {% endif %}
   <button>Submit</button>
 </form>

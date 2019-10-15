@@ -1,8 +1,8 @@
-{% extends 'survey/create.html' %}
-{% load static %}
-{% block content %}
+
+
+
   <h1>SURVEY</h1>
-{% for questions in question_list %}
-  <p>{{questions.name}}</p>
+{% for question in question_list %}
+
+  <p><a href="{% url 'survey:detail' question.id %}">{{question.question_text}}</a></p>
 {% endfor %}
-{% endblock %}
