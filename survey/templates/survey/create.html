@@ -1,0 +1,26 @@
+
+{% load static %}
+
+<!-- load static enables css styling -->
+
+<html lang="en">
+  <head>
+    <title>SURVEY</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'ice_cream/styles.css' %}">
+  </head>
+  <body>
+    <div class="container-fluid">
+      <nav class="nav-bar"><u>
+        <a href="{% url 'ice_cream:all' %}">All</a>
+        <a href="{% url 'ice_cream:daily' %}">Daily</a>
+        <a href="{% url 'ice_cream:weekly' %}">Weekly</a>
+        <a href="{% url 'ice_cream:seasonal' %}">Seasonal</a>
+        <a href="{% url 'ice_cream:featured' %}">Featured</a>
+      </u></nav>
+      {% block content %}
+      {% endblock %}
+    </div>
+  </body>
+</html>
